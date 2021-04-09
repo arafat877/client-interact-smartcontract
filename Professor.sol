@@ -1,30 +1,30 @@
 pragma solidity ^0.4.19;
 
 contract Professor {
-    string firstname;
-    string lastname;
-    uint collegeid;
+    bytes32 firstname;
+    bytes32 lastname;
+    uint    collegeid;
     address owner;
     
     event ProfessorEv(
-       string firstname,
-       string lastname,
-       uint collegeid 
+       bytes32 firstname,
+       bytes32 lastname,
+       uint    collegeid 
     );
     
-    function Professor() public {
+    constructor() public {
     	owner = msg.sender; // owner contains the contract creator's address. 
     }
     
     
-    function setProfessor(string fname,string lname, uint id)  {
+    function setProfessor(bytes32 fname, bytes32 lname, uint id)  external {
 	    firstname = fname;
-	    lastname = lname;
+	    lastname  = lname;
 	    collegeid = id;
-	    ProfessorEv(fname, lname, id);
+	    emit ProfessorEv(fname, lname, id);
     }
     
-    function getProfessor() view public returns(string, string, uint) {
+    function getProfessor() view public returns(bytes32, bytes32, uint) {
         return (firstname, lastname, collegeid);
     }
 }
